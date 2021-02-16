@@ -1,9 +1,11 @@
 ﻿using System;
 using ToHModels;
+using ToHBL;
 namespace ToHUI
 {
     class Program
     {
+        private static IHeroBL heroBL = new HeroBL();
         static void Main(string[] args)
         {
             // Create hero method/logic
@@ -23,7 +25,14 @@ namespace ToHUI
             newHero.SuperPower = newSuperPower;
             Console.WriteLine("Set the element of the hero: ");
             newHero.ElementType = Enum.Parse<Element>(Console.ReadLine());
-            Console.WriteLine($"Hero Created with details: \n\t name: {newHero.HeroName} \n\t superPower: {newHero.SuperPower.Name} \n\t type: {newHero.ElementType}");
+
+            heroBL.AddHero(newHero);
+            foreach (var item in heroBL.GetHeroes())
+            {
+                Console.WriteLine($"Hero Details: \n\t name: {item.HeroName} \n\t superPower: {item.SuperPower.Name} \n\t type: {item.ElementType}");
+            }
+
+
         }
     }
 }
