@@ -29,7 +29,7 @@ namespace ToHUI
             heroBL.AddHero(newHero);
             foreach (var item in heroBL.GetHeroes())
             {
-                Console.WriteLine($"Hero Details: \n\t name: {item.HeroName} \n\t superPower: {item.SuperPower.Name} \n\t type: {item.ElementType}");
+                Console.WriteLine(item.ToString());
             }
 
 
