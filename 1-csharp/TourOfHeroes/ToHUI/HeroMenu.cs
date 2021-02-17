@@ -12,27 +12,36 @@ namespace ToHUI
         }
         public void Start()
         {
-            //menu options part
-            Console.WriteLine("Welcome to my tour of heroes app! What would you like to do?");
-            Console.WriteLine("[0] Create a hero");
-            Console.WriteLine("[1] Get all heroes");
-            Console.WriteLine("[2] Exit.");
-
-            //get user input
-            Console.WriteLine("Enter a number: ");
-            string userInput = Console.ReadLine();
-
-            switch (userInput)
+            Boolean stay = true;
+            do
             {
-                case "0":
-                    CreateHero();
-                    break;
-                case "1":
-                    GetHeroes();
-                    break;
-                default:
-                    break;
-            }
+                //menu options part
+                Console.WriteLine("Welcome to my tour of heroes app! What would you like to do?");
+                Console.WriteLine("[0] Create a hero");
+                Console.WriteLine("[1] Get all heroes");
+                Console.WriteLine("[2] Exit.");
+
+                //get user input
+                Console.WriteLine("Enter a number: ");
+                string userInput = Console.ReadLine();
+
+                switch (userInput)
+                {
+                    case "0":
+                        CreateHero();
+                        break;
+                    case "1":
+                        GetHeroes();
+                        break;
+                    case "2":
+                        stay = false;
+                        ExitRemarks();
+                        break;
+                    default:
+                        Console.WriteLine("Invalid input! Not part of menu options! >:[");
+                        break;
+                }
+            } while (stay);
         }
         public void CreateHero()
         {
@@ -64,6 +73,14 @@ namespace ToHUI
             {
                 Console.WriteLine(item.ToString());
             }
+            Console.WriteLine("Press any key to continue");
+            Console.ReadLine();
+
+        }
+
+        public void ExitRemarks()
+        {
+            Console.WriteLine("Goodbye friend! See you next time!");
         }
     }
 }
