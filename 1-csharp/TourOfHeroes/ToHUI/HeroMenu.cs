@@ -32,9 +32,9 @@ namespace ToHUI
                         {
                             CreateHero();
                         }
-                        catch (Exception)
+                        catch (Exception e)
                         {
-                            Console.WriteLine("invalid input.");
+                            Console.WriteLine("invalid input." + e.Message);
                             continue;
                         }
                         break;
