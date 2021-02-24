@@ -18,6 +18,12 @@ namespace ToHBL
             _repo.AddHero(newHero);
         }
 
+        public Hero GetHeroByName(string name)
+        {
+            //Todo: check if the name given is not null or empty string 
+            return _repo.GetHeroByName(name);
+        }
+
         public List<Hero> GetHeroes()
         {
             //TODO add BL
