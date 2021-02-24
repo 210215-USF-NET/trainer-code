@@ -23,7 +23,7 @@ namespace ToHDL
 
         public List<Model.Hero> GetHeroes()
         {
-            throw new System.NotImplementedException();
+            return _context.Heroes.Include("Superpowers").Select(x => _mapper.ParseHero(x)).ToList();
         }
     }
 }
