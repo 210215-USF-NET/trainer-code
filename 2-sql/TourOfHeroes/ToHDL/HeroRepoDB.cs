@@ -39,5 +39,19 @@ namespace ToHDL
         {
             return _context.Heroes.Include("Superpower").AsNoTracking().Select(x => _mapper.ParseHero(x)).ToList();
         }
+
+        public void UpdateHero(Hero hero2BUpdated)
+        {
+            Entity.Hero oldHero = _context.Heroes.Find(hero2BUpdated.Id);
+            _context.Entry(oldHero).CurrentValues.SetValues(_mapper.ParseHero(hero2BUpdated));
+
+            Entity.Superpower oldSuperPower = _context.Superpowers.Find(hero2BUpdated.SuperPower.Id);
+            oldSuperPower.Damage = hero2BUpdated.SuperPower.Damage;
+            oldSuperPower.Description = hero2BUpdated.SuperPower.Description;
+            oldSuperPower.Name = hero2BUpdated.SuperPower.Name;
+
+            _context.SaveChanges();
+            _context.ChangeTracker.Clear();
+        }
     }
 }

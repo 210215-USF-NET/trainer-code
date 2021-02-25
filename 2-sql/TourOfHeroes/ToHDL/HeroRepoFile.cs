@@ -40,5 +40,10 @@ namespace ToHDL
             }
             return JsonSerializer.Deserialize<List<Hero>>(jsonString);
         }
+
+        public void UpdateHero(Hero hero2BUpdated)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -23,5 +23,10 @@ namespace ToHDL
         {
             throw new System.NotImplementedException();
         }
+
+        public void UpdateHero(Hero hero2BUpdated)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

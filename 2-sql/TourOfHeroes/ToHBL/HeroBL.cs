@@ -34,5 +34,18 @@ namespace ToHBL
             //TODO add BL
             return _repo.GetHeroes();
         }
+
+        public void UpdateHero(Hero hero2BUpdated, Hero updatedDetails)
+        {
+            hero2BUpdated.ElementType = updatedDetails.ElementType;
+            hero2BUpdated.HeroName = updatedDetails.HeroName;
+            hero2BUpdated.HP = updatedDetails.HP;
+
+            hero2BUpdated.SuperPower.Damage = updatedDetails.SuperPower.Damage;
+            hero2BUpdated.SuperPower.Description = updatedDetails.SuperPower.Description;
+            hero2BUpdated.SuperPower.Name = updatedDetails.SuperPower.Name;
+
+            _repo.UpdateHero(hero2BUpdated);
+        }
     }
 }
