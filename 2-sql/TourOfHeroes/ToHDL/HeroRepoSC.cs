@@ -18,5 +18,10 @@ namespace ToHDL
         {
             throw new System.NotImplementedException();
         }
+
+        public Hero DeleteHero(Hero hero2BDeleted)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

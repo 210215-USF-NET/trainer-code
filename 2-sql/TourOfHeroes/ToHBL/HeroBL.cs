@@ -18,6 +18,11 @@ namespace ToHBL
             _repo.AddHero(newHero);
         }
 
+        public void DeleteHero(Hero hero2BDeleted)
+        {
+            _repo.DeleteHero(hero2BDeleted);
+        }
+
         public Hero GetHeroByName(string name)
         {
             //Todo: check if the name given is not null or empty string 

@@ -18,6 +18,11 @@ namespace ToHDL
             return newHero;
         }
 
+        public Hero DeleteHero(Hero hero2BDeleted)
+        {
+            throw new NotImplementedException();
+        }
+
         public Hero GetHeroByName(string name)
         {
             throw new NotImplementedException();

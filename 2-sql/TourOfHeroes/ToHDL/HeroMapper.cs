@@ -2,8 +2,6 @@ using Model = ToHModels;
 using Entity = ToHDL.Entities;
 using ToHModels;
 using ToHDL.Entities;
-using System.Linq;
-using System.Collections.Generic;
 namespace ToHDL
 {
     public class HeroMapper : IMapper

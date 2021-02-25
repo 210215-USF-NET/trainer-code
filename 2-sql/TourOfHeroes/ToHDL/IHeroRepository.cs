@@ -7,5 +7,7 @@ namespace ToHDL
         List<Hero> GetHeroes();
         Hero AddHero(Hero newHero);
         Hero GetHeroByName(string name);
+
+        Hero DeleteHero(Hero hero2BDeleted);
     }
 }
