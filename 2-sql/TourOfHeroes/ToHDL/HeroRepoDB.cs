@@ -25,12 +25,12 @@ namespace ToHDL
 
         public Hero GetHeroByName(string name)
         {
-            return _context.Heroes.Include("Superpowers").Select(x => _mapper.ParseHero(x)).ToList().FirstOrDefault(x => x.HeroName == name);
+            return _context.Heroes.Include("Superpower").AsNoTracking().Select(x => _mapper.ParseHero(x)).ToList().FirstOrDefault(x => x.HeroName == name);
         }
 
         public List<Model.Hero> GetHeroes()
         {
-            return _context.Heroes.Include("Superpowers").Select(x => _mapper.ParseHero(x)).ToList();
+            return _context.Heroes.Include("Superpower").AsNoTracking().Select(x => _mapper.ParseHero(x)).ToList();
         }
     }
 }

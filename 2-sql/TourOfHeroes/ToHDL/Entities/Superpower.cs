@@ -11,7 +11,7 @@ namespace ToHDL.Entities
         public string Name { get; set; }
         public string Description { get; set; }
         public int Damage { get; set; }
-        public int? Hero { get; set; }
+        public int Hero { get; set; }
 
         public virtual Hero HeroNavigation { get; set; }
     }

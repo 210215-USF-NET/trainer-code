@@ -21,7 +21,6 @@ namespace ToHDL.Entities
         public virtual DbSet<Hero> Heroes { get; set; }
         public virtual DbSet<Superpower> Superpowers { get; set; }
 
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasAnnotation("Relational:Collation", "SQL_Latin1_General_CP1_CI_AS");
@@ -58,12 +57,15 @@ namespace ToHDL.Entities
                 entity.HasOne(d => d.ElementTypeNavigation)
                     .WithMany(p => p.Heroes)
                     .HasForeignKey(d => d.ElementType)
-                    .HasConstraintName("FK__heroes__elementT__1EA48E88");
+                    .HasConstraintName("FK__heroes__elementT__37703C52");
             });
 
             modelBuilder.Entity<Superpower>(entity =>
             {
                 entity.ToTable("superpowers");
+
+                entity.HasIndex(e => e.Hero, "UQ__superpow__44A162CBC911F971")
+                    .IsUnique();
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
@@ -84,9 +86,9 @@ namespace ToHDL.Entities
                     .HasColumnName("name");
 
                 entity.HasOne(d => d.HeroNavigation)
-                    .WithMany(p => p.Superpowers)
-                    .HasForeignKey(d => d.Hero)
-                    .HasConstraintName("FK__superpower__hero__2180FB33");
+                    .WithOne(p => p.Superpower)
+                    .HasForeignKey<Superpower>(d => d.Hero)
+                    .HasConstraintName("FK__superpower__hero__3B40CD36");
             });
 
             OnModelCreatingPartial(modelBuilder);
