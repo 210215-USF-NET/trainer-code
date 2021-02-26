@@ -12,6 +12,7 @@ namespace ToHTests
     public class HeroRepoTest
     {
         private readonly DbContextOptions<Entity.HeroDBContext> options;
+        //Because xunit creates new instances of test classes, you need to make sure your db is seeded
         public HeroRepoTest()
         {
             options = new DbContextOptionsBuilder<Entity.HeroDBContext>()
@@ -20,9 +21,12 @@ namespace ToHTests
             Seed();
         }
         //testing read operations
+        //When testing methods that do not change the state of the data in the db, only one context is needed
         [Fact]
         public void GetAllHeroesShouldReturnAllHeroes()
         {
+            //This is a using block, at the end of the execution of the code surrounded by the block, the 
+            //unmanaged resource is going to be disposed of 
             using (var context = new Entity.HeroDBContext(options))
             {
                 //Arrange
@@ -45,6 +49,10 @@ namespace ToHTests
                 Assert.Equal("Aquaman", foundHero.HeroName);
             }
         }
+        //When testing operations that change the state of the db (i.e manipulate the data inside the db) 
+        //make sure to check if the change has persisted even when accessing the db using a different context/connection
+        //This means that you create another instance of your context when testing to check that the method has 
+        //definitely affected the db.
         [Fact]
         public void AddHeroShouldAddHero()
         {
@@ -67,6 +75,7 @@ namespace ToHTests
                     }
                 );
             }
+            //use the context to check the state of the db directly when asserting.
             using (var assertContext = new Entity.HeroDBContext(options))
             {
                 var result = assertContext.Heroes.FirstOrDefault(hero => hero.HeroName == "ironman");
@@ -138,9 +147,9 @@ namespace ToHTests
         }
         private void Seed()
         {
-            // This is an example of a using block, at the end of the execution, the unmanaged resource is disposed
             using (var context = new Entity.HeroDBContext(options))
             {
+                //This makes sure that the state of the db gets recreated every time to maintain the modularity of the tests.
                 context.Database.EnsureDeleted();
                 context.Database.EnsureCreated();
 
