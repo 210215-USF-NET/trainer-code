@@ -4,6 +4,8 @@ using ToHDL;
 using Entity = ToHDL.Entities;
 using Model = ToHModels;
 using System.Linq;
+//When unit testing DBs, note that you need to install the Microsoft.EntityFrameworkCore.Sqlite package
+//Sqlite has features that allows you to create an inmemory rdb. 
 namespace ToHTests
 {
     /// <summary>
@@ -15,6 +17,7 @@ namespace ToHTests
         //Because xunit creates new instances of test classes, you need to make sure your db is seeded
         public HeroRepoTest()
         {
+            //use sqlite to create an inmemory test.db
             options = new DbContextOptionsBuilder<Entity.HeroDBContext>()
             .UseSqlite("Filename=Test.db")
             .Options;
