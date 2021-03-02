@@ -47,7 +47,11 @@ namespace ToHDL
 
         public List<Model.Hero> GetHeroes()
         {
-            return _context.Heroes.Include("Superpower").AsNoTracking().Select(x => _mapper.ParseHero(x)).ToList();
+            return _context.Heroes
+            .Include("Superpower")
+            .AsNoTracking()
+            .Select(x => _mapper.ParseHero(x))
+            .ToList();
         }
 
         public void UpdateHero(Hero hero2BUpdated)

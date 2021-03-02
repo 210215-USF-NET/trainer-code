@@ -1,0 +1,15 @@
+.csstalk,
+.pseudo {
+  font-family: Georgia, "Times New Roman", Times, serif;
+}
+#id {
+  color: #9ea197;
+}
+.pseudo:hover {
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  background-color: azure;
+}
+#pel::first-letter {
+  font-size: x-large;
+}
