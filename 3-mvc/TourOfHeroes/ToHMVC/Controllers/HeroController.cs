@@ -71,10 +71,15 @@ namespace ToHMVC.Controllers
         }
 
         // POST: HeroController/Edit/
+        //Model Binding: bind an action/view to a model, and apply the validation logic stated in model
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(HeroEditVM hero2BUpdated)
         {
+            //Model state is valid literally means model data is valid
+            //you're just checking if the data that you're receiving client side complies with the 
+            // validation you set for the model 
+
             if (ModelState.IsValid)
             {
                 try
