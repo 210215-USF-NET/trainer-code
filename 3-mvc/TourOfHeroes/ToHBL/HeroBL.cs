@@ -12,15 +12,15 @@ namespace ToHBL
         {
             _repo = repo;
         }
-        public void AddHero(Hero newHero)
+        public Hero AddHero(Hero newHero)
         {
             //Todo: Add BL
-            _repo.AddHero(newHero);
+            return _repo.AddHero(newHero);
         }
 
-        public void DeleteHero(Hero hero2BDeleted)
+        public Hero DeleteHero(Hero hero2BDeleted)
         {
-            _repo.DeleteHero(hero2BDeleted);
+            return _repo.DeleteHero(hero2BDeleted);
         }
 
         public Hero GetHeroByName(string name)
@@ -35,7 +35,7 @@ namespace ToHBL
             return _repo.GetHeroes();
         }
 
-        public void UpdateHero(Hero hero2BUpdated, Hero updatedDetails)
+        public Hero UpdateHero(Hero hero2BUpdated, Hero updatedDetails)
         {
             hero2BUpdated.ElementType = updatedDetails.ElementType;
             hero2BUpdated.HeroName = updatedDetails.HeroName;
@@ -45,7 +45,7 @@ namespace ToHBL
             hero2BUpdated.SuperPower.Description = updatedDetails.SuperPower.Description;
             hero2BUpdated.SuperPower.Name = updatedDetails.SuperPower.Name;
 
-            _repo.UpdateHero(hero2BUpdated);
+            return _repo.UpdateHero(hero2BUpdated);
         }
     }
 }

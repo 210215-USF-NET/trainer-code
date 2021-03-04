@@ -9,7 +9,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ToHBL;
 using ToHDL;
+using ToHMVC.Models;
 
 namespace ToHMVC
 {
@@ -27,6 +29,9 @@ namespace ToHMVC
         {
             services.AddControllersWithViews();
             services.AddDbContext<HeroDBContext>(options => options.UseNpgsql(Configuration.GetConnectionString("HeroDB")));
+            services.AddScoped<IHeroRepository, HeroRepoDB>();
+            services.AddScoped<IHeroBL, HeroBL>();
+            services.AddScoped<IMapper, Mapper>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
