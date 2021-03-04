@@ -6,5 +6,6 @@ namespace ToHMVC.Models
     {
         Hero cast2Hero(HeroCRVM hero2BCasted);
         HeroIndexVM cast2HeroIndexVM(Hero hero2BCasted);
+        HeroCRVM cast2HeroCRVM(Hero hero);
     }
 }

@@ -28,5 +28,17 @@ namespace ToHMVC.Models
                 }
             };
         }
+        public HeroCRVM cast2HeroCRVM(Hero hero)
+        {
+            return new HeroCRVM
+            {
+                HeroName = hero.HeroName,
+                HP = hero.HP,
+                ElementType = hero.ElementType,
+                SuperPowerName = hero.SuperPower.Name,
+                Description = hero.SuperPower.Description,
+                Damage = hero.SuperPower.Damage
+            };
+        }
     }
 }

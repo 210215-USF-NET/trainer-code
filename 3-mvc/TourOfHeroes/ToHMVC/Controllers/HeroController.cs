@@ -1,9 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using ToHBL;
 using ToHMVC.Models;
 
@@ -13,11 +10,13 @@ namespace ToHMVC.Controllers
     {
         private IHeroBL _heroBL;
         private IMapper _mapper;
+
         public HeroController(IHeroBL heroBL, IMapper mapper)
         {
             _heroBL = heroBL;
             _mapper = mapper;
         }
+
         //Actions are public methods in controllers that respond to client requests
         //You can have specific actions respond to specific requests
         // you can also have actions, that respond to different requests
@@ -28,16 +27,16 @@ namespace ToHMVC.Controllers
             //You have different kinds of views:
             //Strongly-typed - tied to a model
             //Weakly-typed - not tied to a model. gets data via viewbag, viewdata, tempdata, etc.
-            // Dynamic - pass a model, don't tie to a view, let the view figure it out, 
-                //(do some further research into this)
+            // Dynamic - pass a model, don't tie to a view, let the view figure it out,
+            //(do some further research into this)
             //Let's create a strongly typed view:
             return View(_heroBL.GetHeroes().Select(hero => _mapper.cast2HeroIndexVM(hero)).ToList());
         }
 
-        // GET: HeroController/Details/5
-        public ActionResult Details(int id)
+        // GET: HeroController/Details?name={heroName}
+        public ActionResult Details(string name)
         {
-            return View();
+            return View(_mapper.cast2HeroCRVM(_heroBL.GetHeroByName(name)));
         }
 
         // GET: HeroController/Create
@@ -62,10 +61,8 @@ namespace ToHMVC.Controllers
                 {
                     return View();
                 }
-
             }
             return View();
-            
         }
 
         // GET: HeroController/Edit/5
@@ -89,10 +86,11 @@ namespace ToHMVC.Controllers
             }
         }
 
-        // GET: HeroController/Delete/5
-        public ActionResult Delete(int id)
+        // GET: HeroController/Delete/{hero name}
+        public ActionResult Delete(string name)
         {
-            return View();
+            _heroBL.DeleteHero(_heroBL.GetHeroByName(name));
+            return RedirectToAction(nameof(Index));
         }
 
         // POST: HeroController/Delete/5
