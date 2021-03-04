@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 using ToHBL;
 using ToHMVC.Models;
@@ -66,24 +65,29 @@ namespace ToHMVC.Controllers
         }
 
         // GET: HeroController/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(string name)
         {
-            return View();
+            return View(_mapper.cast2HeroEditVM(_heroBL.GetHeroByName(name)));
         }
 
-        // POST: HeroController/Edit/5
+        // POST: HeroController/Edit/
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(HeroEditVM hero2BUpdated)
         {
-            try
+            if (ModelState.IsValid)
             {
-                return RedirectToAction(nameof(Index));
+                try
+                {
+                    _heroBL.UpdateHero(_mapper.cast2Hero(hero2BUpdated));
+                    return RedirectToAction(nameof(Index));
+                }
+                catch
+                {
+                    return View();
+                }
             }
-            catch
-            {
-                return View();
-            }
+            return View();
         }
 
         // GET: HeroController/Delete/{hero name}
@@ -91,21 +95,6 @@ namespace ToHMVC.Controllers
         {
             _heroBL.DeleteHero(_heroBL.GetHeroByName(name));
             return RedirectToAction(nameof(Index));
-        }
-
-        // POST: HeroController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
         }
     }
 }

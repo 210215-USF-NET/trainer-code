@@ -4,7 +4,7 @@
     ViewData["Title"] = "Create Hero";
 }
 
-<h1>Index</h1>
+<h1>Welcome to my stable of Heroes</h1>
 
 <p>
     <a asp-action="Create">Add a hero to the stable</a>
@@ -37,7 +37,7 @@
                 @Html.DisplayFor(modelItem => item.ElementType)
             </td>
             <td>
-               @* @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |*@
+                @Html.ActionLink("Edit", "Edit", new { name = item.HeroName }) |
                 @Html.ActionLink("Details", "Details", new {  name=item.HeroName }) |
                 @Html.ActionLink("Delete", "Delete", new { name=item.HeroName})
             </td>

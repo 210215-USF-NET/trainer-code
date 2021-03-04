@@ -40,5 +40,36 @@ namespace ToHMVC.Models
                 Damage = hero.SuperPower.Damage
             };
         }
+        public Hero cast2Hero(HeroEditVM hero2BCasted)
+        {
+            return new Hero
+            {
+                Id = hero2BCasted.HeroId,
+                HeroName = hero2BCasted.HeroName,
+                HP = hero2BCasted.HP,
+                ElementType = hero2BCasted.ElementType,
+                SuperPower = new SuperPower
+                {
+                    Id = hero2BCasted.SuperPowerId,
+                    Name = hero2BCasted.SuperPowerName,
+                    Description = hero2BCasted.Description,
+                    Damage = hero2BCasted.Damage
+                }
+            };
+        }
+        public HeroEditVM cast2HeroEditVM(Hero hero)
+        {
+            return new HeroEditVM
+            {
+                HeroName = hero.HeroName,
+                HP = hero.HP,
+                ElementType = hero.ElementType,
+                SuperPowerName = hero.SuperPower.Name,
+                Description = hero.SuperPower.Description,
+                Damage = hero.SuperPower.Damage,
+                HeroId = hero.Id,
+                SuperPowerId = hero.SuperPower.Id
+            };
+        }
     }
 }

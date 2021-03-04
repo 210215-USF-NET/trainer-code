@@ -27,11 +27,19 @@ namespace ToHMVC
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //Services are the things that your app is dependent on
+            //Services have different lifetimes depending on when instances are created for that 
+            //particular dep:
+            // 1. Transient - a new object is created per service call, lots of overhead
+            // 2. Scoped - a new instance is created per request
+            // 3. Singleton - an instance is shared for every request, leads to other requests waiting 
+            //used for dep inj
             services.AddControllersWithViews();
             services.AddDbContext<HeroDBContext>(options => options.UseNpgsql(Configuration.GetConnectionString("HeroDB")));
             services.AddScoped<IHeroRepository, HeroRepoDB>();
             services.AddScoped<IHeroBL, HeroBL>();
             services.AddScoped<IMapper, Mapper>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

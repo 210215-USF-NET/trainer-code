@@ -46,8 +46,24 @@ namespace ToHDL
 
         public Hero UpdateHero(Hero hero2BUpdated)
         {
-            //TODO: To be implemented (maybe by my associates as an activity. Fun.)
-            throw new NotImplementedException();
+            Hero oldHero = _context.Heroes.Find(hero2BUpdated.Id);
+            _context.Entry(oldHero).CurrentValues.SetValues(hero2BUpdated);
+
+            //Because I am not mapping the hero property in my mapper, i am unable to use the method
+            //_context.Entry(oldSuperPower).CurrentValues.SetValues(_mapper.ParseSuperPower(hero2BUpdated.SuperPower))
+            // this would throw an error because i have established a 1:1 relationship between my heroes and superpower
+            //tables. Instead, I take advantage of the change tracker and use it to update the superpower
+            SuperPower oldSuperPower = _context.SuperPowers.Find(hero2BUpdated.SuperPower.Id);
+            oldSuperPower.Damage = hero2BUpdated.SuperPower.Damage;
+            oldSuperPower.Description = hero2BUpdated.SuperPower.Description;
+            oldSuperPower.Name = hero2BUpdated.SuperPower.Name;
+
+            _context.SaveChanges();
+
+            //This method clears the change tracker to drop all tracked entities
+            _context.ChangeTracker.Clear();
+            return hero2BUpdated;
         }
     }
+    
 }

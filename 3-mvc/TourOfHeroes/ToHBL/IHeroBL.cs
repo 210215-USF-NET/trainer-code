@@ -10,6 +10,6 @@ namespace ToHBL
         Hero GetHeroByName(string name);
         Hero DeleteHero(Hero hero2BDeleted);
 
-        Hero UpdateHero(Hero hero2BUpdated, Hero updatedDetails);
+        Hero UpdateHero(Hero hero2BUpdated);
     }
 }
