@@ -1,9 +1,9 @@
 using Xunit;
 using Microsoft.EntityFrameworkCore;
 using ToHDL;
-using Entity = ToHDL.Entities;
 using Model = ToHModels;
 using System.Linq;
+using ToHModels;
 //When unit testing DBs, note that you need to install the Microsoft.EntityFrameworkCore.Sqlite package
 //Sqlite has features that allows you to create an inmemory rdb. 
 namespace ToHTests
@@ -13,12 +13,12 @@ namespace ToHTests
     /// </summary>
     public class HeroRepoTest
     {
-        private readonly DbContextOptions<Entity.HeroDBContext> options;
+        private readonly DbContextOptions<HeroDBContext> options;
         //Because xunit creates new instances of test classes, you need to make sure your db is seeded
         public HeroRepoTest()
         {
             //use sqlite to create an inmemory test.db
-            options = new DbContextOptionsBuilder<Entity.HeroDBContext>()
+            options = new DbContextOptionsBuilder<HeroDBContext>()
             .UseSqlite("Filename=Test.db")
             .Options;
             Seed();
@@ -30,10 +30,10 @@ namespace ToHTests
         {
             //This is a using block, at the end of the execution of the code surrounded by the block, the 
             //unmanaged resource is going to be disposed of 
-            using (var context = new Entity.HeroDBContext(options))
+            using (var context = new HeroDBContext(options))
             {
                 //Arrange
-                IHeroRepository _repo = new HeroRepoDB(context, new HeroMapper());
+                IHeroRepository _repo = new HeroRepoDB(context);
 
                 //Act
                 var heroes = _repo.GetHeroes();
@@ -43,9 +43,9 @@ namespace ToHTests
         [Fact]
         public void GetHeroByNameShouldRetuenHero()
         {
-            using (var context = new Entity.HeroDBContext(options))
+            using (var context = new HeroDBContext(options))
             {
-                IHeroRepository _repo = new HeroRepoDB(context, new HeroMapper());
+                IHeroRepository _repo = new HeroRepoDB(context);
                 var foundHero = _repo.GetHeroByName("Aquaman");
 
                 Assert.NotNull(foundHero);
@@ -59,9 +59,9 @@ namespace ToHTests
         [Fact]
         public void AddHeroShouldAddHero()
         {
-            using (var context = new Entity.HeroDBContext(options))
+            using (var context = new HeroDBContext(options))
             {
-                IHeroRepository _repo = new HeroRepoDB(context, new HeroMapper());
+                IHeroRepository _repo = new HeroRepoDB(context);
                 _repo.AddHero
                 (
                     new Model.Hero
@@ -79,7 +79,7 @@ namespace ToHTests
                 );
             }
             //use the context to check the state of the db directly when asserting.
-            using (var assertContext = new Entity.HeroDBContext(options))
+            using (var assertContext = new HeroDBContext(options))
             {
                 var result = assertContext.Heroes.FirstOrDefault(hero => hero.HeroName == "ironman");
                 Assert.NotNull(result);
@@ -89,9 +89,9 @@ namespace ToHTests
         [Fact]
         public void DeleteShouldDelete()
         {
-            using (var context = new Entity.HeroDBContext(options))
+            using (var context = new HeroDBContext(options))
             {
-                IHeroRepository _repo = new HeroRepoDB(context, new HeroMapper());
+                IHeroRepository _repo = new HeroRepoDB(context);
                 _repo.DeleteHero(
                     new Model.Hero
                     {
@@ -109,7 +109,7 @@ namespace ToHTests
                     }
                 );
             }
-            using (var assertContext = new Entity.HeroDBContext(options))
+            using (var assertContext = new HeroDBContext(options))
             {
                 var result = assertContext.Heroes.Find(1);
                 Assert.Null(result);
@@ -118,9 +118,9 @@ namespace ToHTests
         [Fact]
         public void UpdateHeroShouldUpdate()
         {
-            using (var context = new Entity.HeroDBContext(options))
+            using (var context = new HeroDBContext(options))
             {
-                IHeroRepository _repo = new HeroRepoDB(context, new HeroMapper());
+                IHeroRepository _repo = new HeroRepoDB(context);
                 _repo.UpdateHero(
                     new Model.Hero
                     {
@@ -138,57 +138,34 @@ namespace ToHTests
                     }
                 );
             }
-            using (var assertContext = new Entity.HeroDBContext(options))
+            using (var assertContext = new HeroDBContext(options))
             {
-                var result = assertContext.Heroes.Include("Superpower").FirstOrDefault(hero => hero.Id == 1);
+                var result = assertContext.Heroes.Include("SuperPower").FirstOrDefault(hero => hero.Id == 1);
                 Assert.NotNull(result);
                 Assert.Equal("Aquaperson", result.HeroName);
-                Assert.Equal(1500, result.Hp);
-                Assert.Equal(150, result.Superpower.Damage);
+                Assert.Equal(1500, result.HP);
+                Assert.Equal(150, result.SuperPower.Damage);
 
             }
         }
         private void Seed()
         {
-            using (var context = new Entity.HeroDBContext(options))
+            using (var context = new HeroDBContext(options))
             {
                 //This makes sure that the state of the db gets recreated every time to maintain the modularity of the tests.
                 context.Database.EnsureDeleted();
                 context.Database.EnsureCreated();
 
-                context.ElementTypes.AddRange
-                (
-                    new Entity.ElementType
-                    {
-                        Id = 1,
-                        ElementType1 = "Water"
-                    },
-                    new Entity.ElementType
-                    {
-                        Id = 2,
-                        ElementType1 = "Earth"
-                    },
-                    new Entity.ElementType
-                    {
-                        Id = 3,
-                        ElementType1 = "Air"
-                    },
-                    new Entity.ElementType
-                    {
-                        Id = 4,
-                        ElementType1 = "Fire"
-                    }
-                );
 
                 context.Heroes.AddRange
                 (
-                    new Entity.Hero
+                    new Hero
                     {
                         Id = 1,
                         HeroName = "Aquaman",
-                        Hp = 500,
-                        ElementType = 1,
-                        Superpower = new Entity.Superpower
+                        HP = 500,
+                        ElementType = Element.Water,
+                        SuperPower = new SuperPower
                         {
                             Id = 1,
                             Name = "Super swimming",
@@ -196,13 +173,13 @@ namespace ToHTests
                             Damage = 50
                         }
                     },
-                    new Entity.Hero
+                    new Hero
                     {
                         Id = 2,
                         HeroName = "Batman",
-                        Hp = 100,
-                        ElementType = 2,
-                        Superpower = new Entity.Superpower
+                        HP = 100,
+                        ElementType = Element.Earth,
+                        SuperPower = new SuperPower
                         {
                             Id = 2,
                             Name = "Rich",

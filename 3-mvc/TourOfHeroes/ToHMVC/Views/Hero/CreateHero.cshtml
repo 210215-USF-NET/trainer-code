@@ -10,11 +10,21 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
+        @* Form tag helper. Doesn't really need a controller, since this view is already tied to the HeroController
+            What it does need is an action to route to. basically what asp-action="Create" means is that, you submit this
+            form to the herocontroller to the create action
+         *@
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
+                @* The tag helper label is tying the display property HeroName of a HeroIndexVM object 
+                 *@
                 <label asp-for="HeroName" class="control-label"></label>
+                @* Using the input tag helper, the data type is tied to what kind of input type gets generated, this ties the
+                    user input to a specific property in the object
+                 *@
                 <input asp-for="HeroName" class="form-control" />
+                @* This tag helper, ties the validation put in place for the HeroName property in the model *@
                 <span asp-validation-for="HeroName" class="text-danger"></span>
             </div>
             <div class="form-group">

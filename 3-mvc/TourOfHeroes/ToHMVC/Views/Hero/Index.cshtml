@@ -7,6 +7,7 @@
 <h1>Welcome to my stable of Heroes</h1>
 
 <p>
+    @* asp-action is an example of a tag helper, looks like an attribute of your html element *@
     <a asp-action="Create">Add a hero to the stable</a>
 </p>
 <table class="table">
@@ -25,23 +26,26 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.HeroName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.HP)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ElementType)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { name = item.HeroName }) |
-                @Html.ActionLink("Details", "Details", new {  name=item.HeroName }) |
-                @Html.ActionLink("Delete", "Delete", new { name=item.HeroName})
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HeroName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HP)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ElementType)
+                </td>
+                <td>
+                    @* Helpers are also used to tie your views to particular actions in controllers *@
+                    @* This is an html helper *@
+                    @Html.ActionLink("Edit", "Edit", new { name = item.HeroName }) |
+                    @Html.ActionLink("Details", "Details", new { name=item.HeroName }) |
+                    @Html.ActionLink("Delete", "Delete", new { name=item.HeroName})
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
