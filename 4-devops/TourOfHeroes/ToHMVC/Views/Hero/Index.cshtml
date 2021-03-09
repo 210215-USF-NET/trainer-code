@@ -1,0 +1,51 @@
+﻿@model IEnumerable<ToHMVC.Models.HeroIndexVM>
+
+@{
+    ViewData["Title"] = "Create Hero";
+}
+
+<h1>Welcome to my stable of Heroes</h1>
+
+<p>
+    @* asp-action is an example of a tag helper, looks like an attribute of your html element *@
+    <a asp-action="Create">Add a hero to the stable</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.HeroName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HP)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ElementType)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HeroName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HP)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ElementType)
+                </td>
+                <td>
+                    @* Helpers are also used to tie your views to particular actions in controllers *@
+                    @* This is an html helper *@
+                    @Html.ActionLink("Edit", "Edit", new { name = item.HeroName }) |
+                    @Html.ActionLink("Details", "Details", new { name=item.HeroName }) |
+                    @Html.ActionLink("Delete", "Delete", new { name=item.HeroName})
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
