@@ -13,7 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\TOHBL\ToHBL.csproj" />
+    <ProjectReference Include="..\ToHBL\ToHBL.csproj" />
     <ProjectReference Include="..\ToHModels\ToHModels.csproj" />
   </ItemGroup>
 
