@@ -43,6 +43,7 @@ namespace ToHMVC
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        // Where you declare the middleware you'll use
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
