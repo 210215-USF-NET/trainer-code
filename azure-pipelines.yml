@@ -35,6 +35,7 @@ steps:
     projects: '**/4-devops/TourOfHeroes/ToHTests/*.csproj'
     arguments: --configuration $(buildConfiguration) --collect "Code Coverage"
 - task: PublishCodeCoverageResults@1
+  displayName: publish code coverage results
   inputs:
     codeCoverageTool: 'Cobertura'
     summaryFileLocation: '**/coburtura/coverage.xml'
