@@ -23,16 +23,23 @@ steps:
     projectKey: '210215-USF-NET_trainer-code'
     projectName: 'trainer-code'
 - task: DotNetCoreCLI@2
+  displayName: build 
   inputs:
     command: 'build'
     projects: '**/4-devops/TourOfHeroes/*.sln'
 
 - task: DotNetCoreCLI@2
+  displayName: test
   inputs:
     command: 'test'
     projects: '**/4-devops/TourOfHeroes/ToHTests/*.csproj'
+- task: SonarCloudAnalyze@1
+  displayName: run code analysis
 
+- task: SonarCloudPublish@1
+  displayName: publish code analysis
 - task: DotNetCoreCLI@2
+  displayName: publish
   inputs:
     command: 'publish'
     publishWebProjects: false
@@ -40,6 +47,7 @@ steps:
     projects: '**/4-devops/TourOfHeroes/ToHMVC/*.csproj'
 
 - task: AzureRmWebAppDeployment@4
+  displayName: deploy
   inputs:
     ConnectionType: 'AzureRM'
     azureSubscription: 'TourOfHeroesAzure'
