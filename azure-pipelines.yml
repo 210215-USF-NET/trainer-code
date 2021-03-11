@@ -15,6 +15,13 @@ variables:
   buildConfiguration: 'Release'
 
 steps:
+- task: SonarCloudPrepare@1
+  inputs:
+    SonarCloud: 'TourOfHeroesSonarCloud'
+    organization: '210215-usf-net'
+    scannerMode: 'MSBuild'
+    projectKey: '210215-USF-NET_trainer-code'
+    projectName: 'trainer-code'
 - task: DotNetCoreCLI@2
   inputs:
     command: 'build'
