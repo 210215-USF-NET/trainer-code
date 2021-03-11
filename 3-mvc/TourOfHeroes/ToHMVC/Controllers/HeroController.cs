@@ -71,7 +71,7 @@ namespace ToHMVC.Controllers
         }
 
         // POST: HeroController/Edit/
-        //Model Binding: bind an action/view to a model, and apply the validation logic stated in model
+        //Model Binding: bind an action/view to a model, and apply the validation logic/structure stated in model
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(HeroEditVM hero2BUpdated)
