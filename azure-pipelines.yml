@@ -33,6 +33,11 @@ steps:
   inputs:
     command: 'test'
     projects: '**/4-devops/TourOfHeroes/ToHTests/*.csproj'
+    arguments: --configuration $(buildConfiguration) --collect "Code Coverage"
+- task: PublishCodeCoverageResults@1
+  inputs:
+    codeCoverageTool: 'Cobertura'
+    summaryFileLocation: '**/coburtura/coverage.xml'
 - task: SonarCloudAnalyze@1
   displayName: run code analysis
 
