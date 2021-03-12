@@ -23,6 +23,11 @@ steps:
     projectKey: '210215-USF-NET_trainer-code'
     projectName: 'trainer-code'
 - task: DotNetCoreCLI@2
+  inputs:
+    command: 'restore'
+    projects: '**/4-devops/TourOfHeroes/*.sln'
+    feedsToUse: 'select'
+- task: DotNetCoreCLI@2
   displayName: build 
   inputs:
     command: 'build'
