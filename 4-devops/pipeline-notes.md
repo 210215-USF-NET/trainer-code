@@ -76,3 +76,8 @@
 4. Select cobutura as the code coverage tool
 5. Set the summary file location to be: `**/coburtura/coverage.xml`
 6. Save your piepline and wait to see how much of your code is tested!
+
+## Further reading:
+
+- [YAML Schema for Azure Pipelines](https://docs.microsoft.com/en-us/azure/devops/pipelines/yaml-schema?view=azure-devops&tabs=schema%2Cparameter-schema)
+- [What is Azure Pipelines](https://docs.microsoft.com/en-us/azure/devops/pipelines/get-started/what-is-azure-pipelines?view=azure-devops)
