@@ -1,4 +1,5 @@
 appsettings.json
+Migrations/
 # Created by https://www.toptal.com/developers/gitignore/api/csharp,aspnetcore,visualstudio,visualstudiocode,dotnetcore
 # Edit at https://www.toptal.com/developers/gitignore?templates=csharp,aspnetcore,visualstudio,visualstudiocode,dotnetcore
 
