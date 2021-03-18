@@ -31,6 +31,22 @@ namespace ToHREST
         {
 
             services.AddControllers();
+            services.AddCors(
+                options =>
+                {
+                    options.AddPolicy(
+                        name: "ToHCorsPolicy",
+                        builder =>
+                        {
+                            // when you build your frontend, set this as the angular website domain,
+                            // you might also need to allow the third party API you're using to access your stuff
+                            builder.WithOrigins("*")
+                            .AllowAnyMethod()
+                            .AllowAnyHeader();
+                        }
+                        );
+                }
+                );
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "ToHREST", Version = "v1" });
@@ -53,6 +69,7 @@ namespace ToHREST
             app.UseHttpsRedirection();
 
             app.UseRouting();
+            app.UseCors("ToHCorsPolicy");
 
             app.UseAuthorization();
 
