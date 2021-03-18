@@ -34,8 +34,7 @@ namespace ToHREST
             services.AddCors(
                 options =>
                 {
-                    options.AddPolicy(
-                        name: "ToHCorsPolicy",
+                    options.AddDefaultPolicy(
                         builder =>
                         {
                             // when you build your frontend, set this as the angular website domain,
@@ -69,7 +68,7 @@ namespace ToHREST
             app.UseHttpsRedirection();
 
             app.UseRouting();
-            app.UseCors("ToHCorsPolicy");
+            app.UseCors();
 
             app.UseAuthorization();
 
