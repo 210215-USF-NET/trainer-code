@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using ToHDL;
 using ToHModels;
 
@@ -12,32 +13,32 @@ namespace ToHBL
         {
             _repo = repo;
         }
-        public Hero AddHero(Hero newHero)
+        public async Task<Hero> AddHeroAsync(Hero newHero)
         {
             //Todo: Add BL
-            return _repo.AddHero(newHero);
+            return await _repo.AddHeroAsync(newHero);
         }
 
-        public Hero DeleteHero(Hero hero2BDeleted)
+        public async Task<Hero> DeleteHeroAsync(Hero hero2BDeleted)
         {
-            return _repo.DeleteHero(hero2BDeleted);
+            return await _repo.DeleteHeroAsync(hero2BDeleted);
         }
 
-        public Hero GetHeroByName(string name)
+        public async Task<Hero> GetHeroByNameAsync(string name)
         {
             //Todo: check if the name given is not null or empty string 
-            return _repo.GetHeroByName(name);
+            return await _repo.GetHeroByNameAsync(name);
         }
 
-        public List<Hero> GetHeroes()
+        public async Task<List<Hero>> GetHeroesAsync()
         {
             //TODO add BL
-            return _repo.GetHeroes();
+            return await _repo.GetHeroesAsync();
         }
 
-        public Hero UpdateHero(Hero hero2BUpdated)
+        public async Task<Hero> UpdateHeroAsync(Hero hero2BUpdated)
         {
-            return _repo.UpdateHero(hero2BUpdated);
+            return await _repo.UpdateHeroAsync(hero2BUpdated);
         }
     }
 }

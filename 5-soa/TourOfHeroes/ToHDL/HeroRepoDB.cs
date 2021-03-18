@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using ToHModels;
 
 namespace ToHDL
@@ -13,40 +14,40 @@ namespace ToHDL
         {
             _context = context;
         }
-        public Hero AddHero(Hero newHero)
+        public async Task<Hero> AddHeroAsync(Hero newHero)
         {
-            _context.Heroes.Add(newHero);
-            _context.SaveChanges();
+            await _context.Heroes.AddAsync(newHero);
+            await _context.SaveChangesAsync();
             return newHero;
         }
 
-        public Hero DeleteHero(Hero hero2BDeleted)
+        public async Task<Hero> DeleteHeroAsync(Hero hero2BDeleted)
         {
             _context.Heroes.Remove(hero2BDeleted);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
             return hero2BDeleted;
         }
 
-        public Hero GetHeroByName(string name)
+        public async Task<Hero> GetHeroByNameAsync(string name)
         {
-            return _context.Heroes
+            return await _context.Heroes
                 .Include("SuperPower")
                 .AsNoTracking()
-                .FirstOrDefault(hero => hero.HeroName == name);
+                .FirstOrDefaultAsync(hero => hero.HeroName == name);
         }
 
-        public List<Hero> GetHeroes()
+        public async Task<List<Hero>> GetHeroesAsync()
         {
-            return _context.Heroes
+            return await _context.Heroes
                 .Include("SuperPower")
                 .AsNoTracking()
                 .Select(hero => hero)
-                .ToList();
+                .ToListAsync();
         }
 
-        public Hero UpdateHero(Hero hero2BUpdated)
+        public async Task<Hero> UpdateHeroAsync(Hero hero2BUpdated)
         {
-            Hero oldHero = _context.Heroes.Find(hero2BUpdated.Id);
+            Hero oldHero = await _context.Heroes.FindAsync(hero2BUpdated.Id);
             _context.Entry(oldHero).CurrentValues.SetValues(hero2BUpdated);
 
             //Because I am not mapping the hero property in my mapper, i am unable to use the method
@@ -58,12 +59,12 @@ namespace ToHDL
             oldSuperPower.Description = hero2BUpdated.SuperPower.Description;
             oldSuperPower.Name = hero2BUpdated.SuperPower.Name;
 
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
 
             //This method clears the change tracker to drop all tracked entities
             _context.ChangeTracker.Clear();
             return hero2BUpdated;
         }
     }
-    
+
 }
