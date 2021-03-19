@@ -32,14 +32,31 @@
         </div>
         <div class="container">
             <h2>Closures in JS (another demo)</h2>
+            
             <h4>Encapsulation of shared variables using IIFEs</h4>
             <p>Open the log, whichever button you click increases the count of the stored variable</p>
             <button class="btn btn-warning" onclick="console.log(Outer())">Click this</button>
             <button class="btn btn-warning" onclick="console.log(Outer())">Now click this</button>
+
             <h4>Initializing new closures</h4>
             <p>Open the log, whichever button you click increases the count of the new closure's stored variable</p>
             <button class="btn btn-warning" onclick="console.log(add())">Click this</button>
             <button class="btn btn-warning" onclick="console.log(addAgain())">Now click this</button>
+        </div>
+        <div class="container">
+            <h2>AJAX & Fetch (yet another demo)</h2>
+            <div class="container">
+                <h3>Let's get some pokemons</h3>
+                <form action="">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Enter Pokemon Name or Id" id="pokemonToSearch">
+                        <input type="button" value="Get Pokemon" class = "btn btn-secondary" onclick="GetPokemon()">
+                    </div>
+                </form>
+                <div class="pokemonResult container">
+                    <img src=""/>
+                </div>
+            </div>
         </div>
     </div>
     <script>
