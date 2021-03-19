@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <title>JS Demo</title>
+</head>
+<body>
+    <div class="container">
+        <h1 class="jumbotron">JS Demos</h1>
+        <div class="container">
+            <h2>Functions in JS (a demo)</h2>
+            <div class="list-group">
+                <button class="btn btn-info list-group-item list-group-item-action" onclick="BasicFunction()">
+                    Calling the basic function
+                </button>
+                <button class="btn btn-info list-group-item list-group-item-action" onclick="ParentFunction(GreetWithoutName)">
+                    Calling a callback function
+                </button>
+                <button class="btn btn-info list-group-item list-group-item-action" onclick="ParentFunction((name, age) => alert(`Hello! ${name} you are ${age}`))">
+                    Using an arrow function as a callback function
+                </button>
+                <button class="btn btn-info list-group-item list-group-item-action"
+                    onclick="(() => alert('This function expression has been immediately invoked'))();">
+                    Calling an IIFE
+                </button>
+            </div>
+        </div>
+        <div class="container">
+            <h2>Closures in JS (another demo)</h2>
+            <h4>Encapsulation of shared variables using IIFEs</h4>
+            <p>Open the log, whichever button you click increases the count of the stored variable</p>
+            <button class="btn btn-warning" onclick="console.log(Outer())">Click this</button>
+            <button class="btn btn-warning" onclick="console.log(Outer())">Now click this</button>
+            <h4>Initializing new closures</h4>
+            <p>Open the log, whichever button you click increases the count of the new closure's stored variable</p>
+            <button class="btn btn-warning" onclick="console.log(add())">Click this</button>
+            <button class="btn btn-warning" onclick="console.log(addAgain())">Now click this</button>
+        </div>
+    </div>
+    <script>
+        //This is a basic function
+        function BasicFunction()
+        {
+            alert('Hello World of JS!');
+        }
+        function ParentFunction(callBack)
+        {
+            console.log('In parent function');
+            let name = prompt('Please enter your name');
+            callBack(name);
+            console.log('Back in parent function');
+        }
+        //In JS you can pass more or less than the declared parameters in a function, the function just ignores the extra, and
+        // initializes the missing ones as undefined
+        function GreetWithName(name)
+        {
+            alert(`Hello! ${name}`);
+            console.log('calling back');
+        }
+        function GreetWithoutName()
+        {
+            alert("Hello");
+            console.log('calling back');
+        }
+    </script>
+    <script src="encapsulation.js"></script>
+</body>
+</html>
