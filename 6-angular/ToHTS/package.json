@@ -1,0 +1,13 @@
+{
+  "name": "ToHTS",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "tsc" : "tsc"
+  },
+  "keywords": [],
+  "author": "Marielle Nolasco",
+  "license": "ISC"
+}
