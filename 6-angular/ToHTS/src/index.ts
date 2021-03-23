@@ -1,26 +1,22 @@
 import { hero } from "./models/hero";
 
 // note that when declaring stuff, you assign it a type
-function GetAllHeroes() : void
-{
+function GetAllHeroes(): void {
     fetch("https://localhost:5001/api/hero")
         .then(response => response.json())
         .then(responseBody => PrintHeroesTable(responseBody));
 }
-function PrintHeroesTable(heroes : hero[]) : void
-{
+function PrintHeroesTable(heroes: hero[]): void {
     document.querySelectorAll('#heroes tbody tr').forEach(row => row.remove());
     //using the union to set the table element to either be of type HTMLTableElement (which is an interface) or null
     let table: HTMLTableElement | null = document.querySelector<HTMLTableElement>('#heroes tbody');
     //leveraging the truthiness of the table value
-    if (table)
-    {
+    if (table) {
         //for each hero from the server, add a row to the table
-        for (let i: number = 0; i < heroes.length; ++i)
-        {
+        for (let i: number = 0; i < heroes.length; ++i) {
             //inserting a row at the bottom of a table
             let row: HTMLTableRowElement = table.insertRow(table.rows.length);
-            
+
             //inserting a data cell of index 0 at the row
             let heroNameCell: HTMLTableCellElement = row.insertCell(0);
             //setting the data of that cell to be the current hero's name
@@ -43,4 +39,34 @@ function PrintHeroesTable(heroes : hero[]) : void
 
         }
     }
+
+}
+function AddAHero(): void {
+    let hero2Add: hero = {
+        heroName: document.querySelector<HTMLInputElement>('#heroName')!.value,
+        hp: parseInt(document.querySelector<HTMLInputElement>('#hp')!.value),
+        elementType: parseInt(document.querySelector<HTMLSelectElement>('#elementType')!.value),
+        superPower:
+        {
+            name: document.querySelector<HTMLInputElement>('#superPowerName')!.value,
+            description: document.querySelector<HTMLInputElement>('#superPowerDesc')!.value,
+            damage: parseInt(document.querySelector<HTMLInputElement>('#superPowerDmg')!.value)
+        }
+    }
+    let xhr: XMLHttpRequest = new XMLHttpRequest();
+    xhr.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status > 199 && this.status < 300) {
+            console.log("a hero has been added");
+            document.querySelector<HTMLInputElement>('#heroName')!.value = '';
+            document.querySelector<HTMLInputElement>('#hp')!.value = '';
+            document.querySelector<HTMLSelectElement>('#elementType')!.value = '';
+            document.querySelector<HTMLInputElement>('#superPowerName')!.value = '';
+            document.querySelector<HTMLInputElement>('#superPowerDesc')!.value = '';
+            document.querySelector<HTMLInputElement>('#superPowerDmg')!.value = '';
+            GetAllHeroes();
+        }
+    }
+    xhr.open("POST", "https://localhost:5001/api/hero", true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.send(JSON.stringify(hero2Add));
 }

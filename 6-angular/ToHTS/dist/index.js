@@ -33,3 +33,31 @@ function PrintHeroesTable(heroes) {
         }
     }
 }
+function AddAHero() {
+    var hero2Add = {
+        heroName: document.querySelector('#heroName').value,
+        hp: parseInt(document.querySelector('#hp').value),
+        elementType: parseInt(document.querySelector('#elementType').value),
+        superPower: {
+            name: document.querySelector('#superPowerName').value,
+            description: document.querySelector('#superPowerDesc').value,
+            damage: parseInt(document.querySelector('#superPowerDmg').value)
+        }
+    };
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status > 199 && this.status < 300) {
+            console.log("a hero has been added");
+            document.querySelector('#heroName').value = '';
+            document.querySelector('#hp').value = '';
+            document.querySelector('#elementType').value = '';
+            document.querySelector('#superPowerName').value = '';
+            document.querySelector('#superPowerDesc').value = '';
+            document.querySelector('#superPowerDmg').value = '';
+            GetAllHeroes();
+        }
+    };
+    xhr.open("POST", "https://localhost:5001/api/hero", true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.send(JSON.stringify(hero2Add));
+}
