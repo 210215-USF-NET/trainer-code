@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { hero } from 'src/app/models/hero';
 import { HeroRESTService } from 'src/app/services/hero-rest.service';
 
@@ -14,7 +15,7 @@ export class GetHeroesComponent implements OnInit {
 
   //Where you inject your deps
   //Inject the heroRest service to gain access to the data access methods of the service
-  constructor(private heroService: HeroRESTService) { }
+  constructor(private heroService: HeroRESTService, private router: Router) { }
 
   //Lifecycle hook 
   // On initialization of this particular component what do you wanna do? 
@@ -27,4 +28,11 @@ export class GetHeroesComponent implements OnInit {
     );
   }
 
+  GetHero(heroName: string) {
+    //a way to pass data between components that have no parent child relationship 
+    //ways to pass data between components with no parent child relationship:
+    // 1. Via query parameters
+    // 2. Via a service that both components subscribe to that holds the shared data
+    this.router.navigate(['hero-details'], { queryParams: { hero: heroName } });
+  }
 }

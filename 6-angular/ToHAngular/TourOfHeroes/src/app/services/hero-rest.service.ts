@@ -31,4 +31,10 @@ export class HeroRESTService {
   GetAllHeroes(): Observable<hero[]> {
     return this.http.get<hero[]>(this.url, this.httpOptions);
   }
+  GetHero(heroName: string): Observable<hero> {
+    return this.http.get<hero>(`${this.url}/${heroName}`, this.httpOptions);
+  }
+  AddHero(hero2Add: hero): Observable<hero> {
+    return this.http.post<hero>(this.url, hero2Add, this.httpOptions);
+  }
 }

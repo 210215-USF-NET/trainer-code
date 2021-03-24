@@ -3,19 +3,13 @@
         <thead>
             <th>Hero Name</th>
             <th>HP</th>
-            <th>Element</th>
-            <th>SP Name</th>
-            <th>SP Desc</th>
-            <th>SP Dmg</th>
+            <th>Superpower Name</th>
         </thead>
         <tbody>
-            <tr *ngFor="let hero of heroes;">
+            <tr *ngFor="let hero of heroes;" (click)="GetHero(hero.heroName)">
                 <td>{{hero.heroName}}</td>
                 <td>{{hero.hp}}</td>
-                <td>{{hero.elementType}}</td>
                 <td>{{hero.superPower.name}}</td>
-                <td>{{hero.superPower.description}}</td>
-                <td>{{hero.superPower.damage}}</td>
             </tr>
         </tbody>
     </table>
