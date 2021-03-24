@@ -1,0 +1,22 @@
+<div class="container transparent">
+    <table class="table">
+        <thead>
+            <th>Hero Name</th>
+            <th>HP</th>
+            <th>Element</th>
+            <th>SP Name</th>
+            <th>SP Desc</th>
+            <th>SP Dmg</th>
+        </thead>
+        <tbody>
+            <tr *ngFor="let hero of heroes;">
+                <td>{{hero.heroName}}</td>
+                <td>{{hero.hp}}</td>
+                <td>{{hero.elementType}}</td>
+                <td>{{hero.superPower.name}}</td>
+                <td>{{hero.superPower.description}}</td>
+                <td>{{hero.superPower.damage}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
