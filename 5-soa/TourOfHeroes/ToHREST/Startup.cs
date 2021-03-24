@@ -39,7 +39,8 @@ namespace ToHREST
                         {
                             // when you build your frontend, set this as the angular website domain,
                             // you might also need to allow the third party API you're using to access your stuff
-                            builder.WithOrigins("*")
+                            builder
+                            .AllowAnyOrigin()
                             .AllowAnyMethod()
                             .AllowAnyHeader();
                         }
