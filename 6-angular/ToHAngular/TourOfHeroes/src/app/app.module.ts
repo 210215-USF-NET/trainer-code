@@ -5,11 +5,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { GetHeroesComponent } from './components/get-heroes/get-heroes.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    GetHeroesComponent
+    GetHeroesComponent,
+    NavBarComponent
   ],
   //This is where you declare external modules you'll be utilizing 
   imports: [
