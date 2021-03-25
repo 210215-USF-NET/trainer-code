@@ -20,8 +20,11 @@ export class AddHeroComponent implements OnInit {
       {
         name: '',
         description: '',
-        damage: 0
-      }
+        damage: 0,
+        id: 0,
+        heroid: 0
+      },
+      id: 0
     }
   }
 

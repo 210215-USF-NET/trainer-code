@@ -9,6 +9,10 @@ import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { AddHeroComponent } from './components/add-hero/add-hero.component';
 import { FormsModule } from '@angular/forms';
 import { HeroDetailsComponent } from './components/hero-details/hero-details.component';
+import { EditHeroComponent } from './components/edit-hero/edit-hero.component';
+import { AuthModule } from '@auth0/auth0-angular';
+import { AuthButtonComponent } from './components/auth-button/auth-button.component';
+import { environment } from 'src/environments/environment';
 
 @NgModule({
   declarations: [
@@ -16,7 +20,9 @@ import { HeroDetailsComponent } from './components/hero-details/hero-details.com
     GetHeroesComponent,
     NavBarComponent,
     AddHeroComponent,
-    HeroDetailsComponent
+    HeroDetailsComponent,
+    EditHeroComponent,
+    AuthButtonComponent
   ],
   //This is where you declare external modules you'll be utilizing 
   imports: [
@@ -24,7 +30,13 @@ import { HeroDetailsComponent } from './components/hero-details/hero-details.com
     AppRoutingModule,
     HttpClientModule,
     NgbModule,
-    FormsModule
+    FormsModule,
+    AuthModule.forRoot(
+      {
+        domain: environment.AUTH_DOMAIN,
+        clientId: environment.AUTH_CLIENT_ID
+      }
+    )
   ],
   providers: [],
   bootstrap: [AppComponent]

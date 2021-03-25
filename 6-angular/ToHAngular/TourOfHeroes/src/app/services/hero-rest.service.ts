@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { hero } from '../models/hero';
 
 @Injectable({
@@ -17,7 +18,7 @@ export class HeroRESTService {
     )
   }
   //defines the url we'll be querying
-  url: string = 'https://localhost:5001/api/hero';
+  url: string = environment.HEROES_REST;
 
   //This is where you inject your deps
   //the httpClient is what you'll be using to query your external REST API
@@ -36,5 +37,11 @@ export class HeroRESTService {
   }
   AddHero(hero2Add: hero): Observable<hero> {
     return this.http.post<hero>(this.url, hero2Add, this.httpOptions);
+  }
+  DeleteHero(hero2BDeleted: string): Observable<any> {
+    return this.http.delete<any>(`${this.url}/${hero2BDeleted}`, this.httpOptions);
+  }
+  EditHero(hero2BEdited: hero): Observable<any> {
+    return this.http.put<any>(`${this.url}/${hero2BEdited.id}`, hero2BEdited, this.httpOptions)
   }
 }

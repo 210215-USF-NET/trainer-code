@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from '@auth0/auth0-angular';
 import { AddHeroComponent } from './components/add-hero/add-hero.component';
+import { EditHeroComponent } from './components/edit-hero/edit-hero.component';
 import { GetHeroesComponent } from './components/get-heroes/get-heroes.component';
 import { HeroDetailsComponent } from './components/hero-details/hero-details.component';
 //This module gets scaffolded when you say to include routing in your angular app
@@ -9,15 +11,23 @@ import { HeroDetailsComponent } from './components/hero-details/hero-details.com
 const routes: Routes = [
   {
     path: 'get-heroes',
-    component: GetHeroesComponent
+    component: GetHeroesComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'add-hero',
-    component: AddHeroComponent
+    component: AddHeroComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'hero-details',
-    component: HeroDetailsComponent
+    component: HeroDetailsComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'edit-hero',
+    component: EditHeroComponent,
+    canActivate: [AuthGuard]
   }
 ];
 
