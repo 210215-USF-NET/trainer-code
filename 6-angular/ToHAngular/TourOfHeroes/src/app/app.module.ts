@@ -14,6 +14,7 @@ import { AuthModule } from '@auth0/auth0-angular';
 import { AuthButtonComponent } from './components/auth-button/auth-button.component';
 import { environment } from 'src/environments/environment';
 
+//this is the metadata of the module
 @NgModule({
   declarations: [
     AppComponent,
