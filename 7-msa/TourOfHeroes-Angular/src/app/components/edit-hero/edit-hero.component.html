@@ -1,0 +1,41 @@
+<div class="container transparent">
+    <form (ngSubmit)="onSubmit()" #heroForm="ngForm">
+        <div class="form-group">
+            <label for="heroName">Hero's Name: </label>
+            <input type="text" [(ngModel)]="hero2Edit.heroName" name="heroName" id="heroName" #name="ngModel"
+                class="form-control" placeholder="Enter hero's name">
+        </div>
+        <div class="form-group">
+            <label for="hp">Hero's HP: </label>
+            <input type="number" [(ngModel)]="hero2Edit.hp" name="hp" id="hp" #name="ngModel" class="form-control"
+                placeholder="Enter hero's hp">
+        </div>
+        <div class="form-group">
+            <label for="elementType">Hero's Element: </label>
+            <select [(ngModel)]="hero2Edit.elementType" name="elementType" id="elementType" #name="ngModel"
+                class="form-select">
+                <option value="0">Unknown</option>
+                <option value="1">Water</option>
+                <option value="2">Earth</option>
+                <option value="3">Air</option>
+                <option value="4">Fire</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="superPowerName">Hero's Superpower's Name: </label>
+            <input type="text" class="form-control" id='superPowerName' [(ngModel)]="hero2Edit.superPower.name"
+                name="superPowerName" #name="ngModel" placeholder="Enter hero's superpower's name">
+        </div>
+        <div class="form-group">
+            <label for="superPowerDesc">Hero's Superpower's Description: </label>
+            <input type="text" class="form-control" id='superPowerDesc' [(ngModel)]="hero2Edit.superPower.description"
+                name="superPowerDesc" #name="ngModel" placeholder="Enter hero's superpower's description">
+        </div>
+        <div class="form-group">
+            <label for="superPowerDmg">Hero's Superpower's Damage: </label>
+            <input type="number" class="form-control" id='superPowerDmg' [(ngModel)]="hero2Edit.superPower.damage"
+                name="superPowerDmg" #name="ngModel" placeholder="Enter hero's superpower's damage">
+        </div>
+        <button type="submit" class="btn btn-primary">Save</button>
+    </form>
+</div>
