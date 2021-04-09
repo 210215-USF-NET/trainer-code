@@ -1,0 +1,30 @@
+<div *ngIf="hero" class="container transparent">
+
+    <h2>{{hero.heroName | uppercase}} Details</h2>
+    <table class="table">
+        <tbody>
+            <tr>
+                <td>HP: </td>
+                <td>{{hero.hp}}</td>
+            </tr>
+            <tr>
+                <td>Element: </td>
+                <td>{{hero.elementType}}</td>
+            </tr>
+            <tr>
+                <td>Superpower Name: </td>
+                <td>{{hero.superPower.name}}</td>
+            </tr>
+            <tr>
+                <td>Superpower Description: </td>
+                <td>{{hero.superPower.description}}</td>
+            </tr>
+            <tr>
+                <td>Superpower Damage: </td>
+                <td>{{hero.superPower.damage}}</td>
+            </tr>
+        </tbody>
+    </table>
+    <button class="btn btn-warning" (click)="EditHero(hero.heroName)">Edit</button> |
+    <button class="btn btn-danger" (click)="DeleteHero(hero.heroName)">Delete</button>
+</div>

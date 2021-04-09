@@ -1,0 +1,25 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: tour-of-heroes-ingress
+  namespace: ingress-basic
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    # to use regex on my paths
+    nginx.ingress.kubernetes.io/use-regex: "true"
+    # also something about the path, rewriting the target, modifying the url
+    nginx.ingress.kubernetes.io/rewrite-target: /$1
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
+spec:
+  rules:
+    - http:
+        paths:
+          - path: /?(.*)
+            backend:
+              serviceName: website
+              servicePort: 4200
+          - path: /api/?(.*)
+            backend:
+              serviceName: api
+              servicePort: 5001
